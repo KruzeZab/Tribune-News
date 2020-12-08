@@ -1,0 +1,8 @@
+<ul class="popular-searches">
+    {% for trending in trendings %}
+        <li class="popular-search">
+            <a href="{% url 'blog:article' trending.category trending.slug %}">{{ trending.title }}</a>
+      </li>
+    {% endfor %}
+    
+  </ul>

@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load trendings %}
+{% block content %}
+    
+<main id="tribune-content" class="wrapper container-fluid">
+  <div class="content-wrapper">
+      <div class="main-content">
+        <!-- Main Featured Card big one -->
+        <article class="card mb-2 bg-white featured-card">
+            <div class="card-img">
+              <img data-src="{{ blogs.0.photo_main.url }}" alt="">
+            </div>
+            <div class="card-body">
+              <a href="{% url 'blog:article' blogs.0.category blogs.0.slug %}" class="card-title featured-card-title">
+                <h2>
+                  {{ blogs.0.title|title }} 
+                </h2>
+              </a>
+            </div>
+        </article>
+        <!-- end of main featured card -->
+
+        <!-- list media article Hot Topics-->
+        <div class="article-listing">
+          {% for blog in blogs|slice:"1:5" %}
+            <!-- single list article  -->
+            <article class="card mb-2 bg-white list-card">
+              <div class="list-card-wrapper">
+                <div class="card-img">
+                  <img data-src="{{ blog.photo_main.url }}" alt="">
+                </div>
+                <div class="card-body">
+                  <p class="category">
+                    <i class="fas fa-fire-alt"></i>
+                    {{ blog.category }}
+                  </p>
+                  <a href="{% url 'blog:article' blog.category blog.slug %}" class="card-title">
+                    <h2>{{ blog.title|title|truncatechars:50 }}
+                    </h2>
+                  </a>
+                  <p class="card-text">
+                    {{ blog.description }}
+                  </p>
+                  <small class="time mb-2"> <i class="far fa-clock"></i> {{ blog.list_date|naturaltime }}</small>
+                </div>
+              </div>
+            </article>
+            <!-- end of single list article -->
+          {% endfor %}
+            <!-- end of list media article -->
+          </div>
+          <!-- end of list media -->
+
+        <!-- List with border and title -->
+          <div class="promotional bg-white">
+            <h3 class="list-title bg-white">
+              <i class="fas fa-fire"></i>
+              Hot Topics
+            </h3>
+            <div class="promotional-articles">
+              <div class="promotional-content-wrapper">
+                {% show_trendings %}
+              </div>
+              
+            </div>
+          </div>
+        <!-- End of lsit with border and title -->
+
+        <!-- list media article 2 -->
+        <div class="article-listing">
+          <!-- single list article  -->
+          {% for blog in blogs|slice:"5:10" %}
+            <article class="card mb-2 bg-white list-card">
+            <div class="list-card-wrapper">
+              <div class="card-img">
+                <img data-src="{{ blog.photo_main.url }}" alt="">
+              </div>
+              <div class="card-body">
+                <p class="category">
+                  <i class="fas fa-fire-alt"></i>
+                  {{ blog.category }}
+                </p>
+                <a href="{% url 'blog:article' blog.category blog.slug %}" class="card-title">
+                  <h2>{{ blog.title|title }}
+                  </h2>
+                </a>
+                <p class="card-text">
+                  {{ blog.description }}
+                </p>
+                <small class="time mb-2"> <i class="far fa-clock"></i> {{ blog.list_date|naturaltime }}</small>
+              </div>
+            </div>
+            </article>
+          {% endfor %}
+        <!-- end of single list article -->
+        <!-- end of list media article -->
+      </div>
+      <!-- end of list media -->
+
+      <!-- List with border and title -->
+      <div class="promotional bg-white">
+        <h3 class="list-title bg-white">
+          <i class="fas fa-fire"></i>
+          Recent
+        </h3>
+        <div class="promotional-articles">
+          <div class="promotional-content-wrapper">
+            {% for blog in blogs|slice:':3' %}
+              <!-- Single promotional article -->
+              <article class="card mb-2">
+                <div class="card-img">
+                  <img data-src="{{ blog.photo_main.url }}" alt="">
+                </div>
+                <div class="card-body">
+                  <a class="card-title" href="{% url 'blog:article' blog.category blog.slug %}">
+                    <h2>{{ blog.title|truncatechars:50 }}</h2>
+                  </a>
+                </div>
+              </article>
+              <!-- end of single promotinal article -->
+            {% endfor %}
+            
+
+
+          </div>
+          
+        </div>
+      </div>
+    <!-- End of lsit with border and title -->
+
+    <!-- list media article 2 -->
+    <div class="article-listing">
+      {% for blog in blogs|slice:"10:15" %}
+            <article class="card mb-2 bg-white list-card">
+            <div class="list-card-wrapper">
+              <div class="card-img">
+                <img data-src="{{ blog.photo_main.url }}" alt="">
+              </div>
+              <div class="card-body">
+                <p class="category">
+                  <i class="fas fa-fire-alt"></i>
+                  {{ blog.category }}
+                </p>
+                <a href="{% url 'blog:article' blog.category blog.slug %}" class="card-title">
+                  <h2>{{ blog.title }}
+                  </h2>
+                </a>
+                <p class="card-text">
+                  {{ blog.description }}
+                </p>
+                <small class="time mb-2"> <i class="far fa-clock"></i> {{ blog.list_date|naturaltime }}</small>
+              </div>
+            </div>
+            </article>
+        {% endfor %}  
+
+
+    </div>
+
+    <!-- List with border and title -->
+    <div class="promotional bg-white mb-2">
+      <h3 class="list-title bg-white">
+        <i class="fas fa-fire"></i>
+        Tribunes Pick
+      </h3>
+      <div class="promotional-articles">
+        <div class="promotional-content-wrapper">
+          {% for trending in trendings|slice:'3:' %}
+              <!-- Single promotional article -->
+              <article class="card mb-2">
+                <div class="card-img">
+                  <img data-src="{{ trending.photo_main.url }}" alt="">
+                </div>
+                <div class="card-body">
+                  <a class="card-title" href="{% url 'blog:article' trending.category trending.slug %}">
+                    <h2>{{ trending.title|truncatechars:50 }}</h2>
+                  </a>
+                </div>
+              </article>
+              <!-- end of single promotinal article -->
+            {% endfor %}
+
+        </div>
+        
+      </div>
+    </div>
+  <!-- End of lsit with border and title -->
+    
+
+    <div class="article-listing" id="main-list">      
+      {% for blog in blogs|slice:"15:" %}
+        <article class="card mb-2 bg-white list-card">
+      <div class="list-card-wrapper">
+        <div class="card-img">
+          <img data-src="{{ blog.photo_main.url }}" alt="">
+        </div>
+        <div class="card-body">
+          <p class="category">
+            <i class="fas fa-fire-alt"></i>
+            {{ blog.category }}
+          </p>
+          <a href="{% url 'blog:article' blog.category blog.slug %}" class="card-title">
+            <h2>{{ blog.title }}
+            </h2>
+          </a>
+          <p class="card-text">
+            {{ blog.description }}
+          </p>
+          <small class="time mb-2"> <i class="far fa-clock"></i> {{ blog.list_date|naturaltime }}</small>
+        </div>
+      </div>
+        </article>
+    {% endfor %}
+  </div>
+    
+    <!-- end of list media -->
+
+  </div> <!-- content wrapper -->
+
+      <div class="aside-content">
+        <div id="checkout" class="bg-white sider">
+            <h2 class="news-title">
+              Latest News
+            </h2>
+          <div class=" news">
+            <ul class="news-list">
+              {% for blog in blogs|slice:':4' %}
+                <li class="latest-news-item">
+                  <a href="{% url 'blog:article' blog.category blog.slug %}">
+                  {{ blog.title|title }} 
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Trending -->
+        <div id="trending-list" class="bg-white mb-2 sider">
+          <h2 class="trending-title">
+            <i class="fas fa-chart-line"></i> Trending
+          </h2>
+          <div class="card news">
+            {% show_trendings %}
+          </div>
+        </div>
+        <!-- End of trending -->
+
+      </div>
+    </div>
+
+  </main>
+
+{% endblock %}
+
+{% block ajax %} <script src="{% static 'js/blog_load.js' %}"></script> {% endblock %}

@@ -1,0 +1,30 @@
+{% load humanize %}
+{% for post in posts %}
+    <article class="card mb-2 bg-white list-card">
+        <div class="list-card-wrapper">
+        <div class="card-img">
+            <img src="{{ post.photo_main.url }}" alt="">
+        </div>
+        <div class="card-body">
+            <p class="category">
+            <i class="fas fa-fire-alt"></i>
+            {{ post.category }}
+            </p>
+            <a href="{% url 'blog:article' post.category post.slug %}" class="card-title">
+            <h2>{{ post.title }}
+            </h2>
+            </a>
+            <p class="card-text">
+            {{ post.description }}
+            </p>
+            <small class="time"> <i class="far fa-clock"></i> {{ post.list_date|naturaltime }}</small>
+        </div>
+        </div>
+    </article>
+    {% empty %}
+    {% if last %}
+        {{ last }}
+    {% endif %}
+    
+{% endfor %}
+

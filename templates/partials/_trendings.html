@@ -1,0 +1,16 @@
+{% load static %}
+
+{% for trending in trendings %}
+    <!-- Single promotional article -->
+    <article class="card mb-2">
+    <div class="card-img">
+        <img data-src="{{ trending.photo_main.url }}" alt="">
+    </div>
+    <div class="card-body">
+        <a class="card-title" href="{% url 'blog:article' trending.category trending.slug %}">
+        <h2>{{ trending.title|truncatechars:50|title }} </h2>
+        </a>
+    </div>
+    </article>
+    <!-- end of single promotinal article -->
+{% endfor %}

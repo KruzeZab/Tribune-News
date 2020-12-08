@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load trendings %}
+
+{% block content %}
+    <main id="tribune-content" class="wrapper container-fluid">
+    
+        <div class="content-wrapper bg-white">
+        <!-- main content -->
+        <div class="main-content">
+        <h2 style="color: red; margin-bottom: 20px;">Here are your search results:</h2>
+            <!-- search result here -->
+            {% for blog in blogs %}
+                <!-- single list article  -->
+                <article class="card mb-2 bg-white list-card">
+                <div class="list-card-wrapper">
+                    <div class="card-img">
+                    <img data-src="{{ blog.photo_main.url }}" alt="">
+                    </div>
+                    <div class="card-body">
+                    <p class="category">
+                        <i class="fas fa-fire-alt"></i>
+                        {{ blog.category }}
+                    </p>
+                    <a href="{% url 'blog:article' blog.category blog.slug %}" class="card-title">
+                        <h2>{{ blog.title|title }}
+                        </h2>
+                    </a>
+                    <p class="card-text">
+                        {{ blog.description }}
+                    </p>
+                    <small class="time mb-2"> <i class="far fa-clock"></i>{{ blog.list_date|naturaltime }}</small>
+                    </div>
+                </div>
+                </article>
+                <!-- end of single list article -->
+                {% empty %}
+                <h2 style="color: red; margin: 30% 0; text-align: center; font-size: 3rem;">No results Found</h2>
+            {% endfor %}    
+
+            {% if is_paginated %}
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li><a href="?q={{ request.GET.q }}&page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <li class="active_page"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li><a href="?q={{ request.GET.q }}&page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li><a href="?q={{ request.GET.q }}&page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+            
+
+            <!-- end of search result -->
+
+        </div>
+            <div class="aside-content">
+            <!-- Trending -->
+            <div id="trending-list" class="bg-white mb-2 sider">
+                <h2 class="trending-title">
+                <i class="fas fa-chart-line"></i> Trending
+                </h2>
+                <div class="card news">
+                {% show_trendings %}
+                </div>
+            </div>
+            <!-- End of trending -->
+            </div>
+        </div>
+        <!-- end of main content -->
+  </main>
+
+{% endblock %}
+

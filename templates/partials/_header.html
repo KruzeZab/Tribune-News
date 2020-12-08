@@ -1,0 +1,56 @@
+{% load static %}
+{% load trendings %}
+<header id="header">
+    <nav id="nav">
+      <div id="branding">
+        <!-- nav button -->
+        <div class="nav-toggler">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </div>
+        <!-- end of nav button -->
+        <a href="{% url 'blog:index' %}"><span>TRIBUNE STATES</span></a>
+      </div>
+
+      <!-- nav items -->
+      <ul class="nav-items">
+        <li class="nav-link"><a href="{% url 'blog:index' %}">Home</a></li>
+        <li class="nav-link"><a href="{% url 'blog:category' 'politics' %}">Politics</a></li>
+        <li class="nav-link"><a href="{% url 'blog:category' 'agriculture' %}">Agriculture</a></li>
+        <li class="nav-link"><a href="{% url 'blog:category' 'science' %}">Sicence</a></li>
+        <li class="nav-link"><a href="{% url 'blog:category' 'food' %}">Food</a></li>
+        <li class="nav-link"><a href="{% url 'blog:category' 'sports' %}">Sports</a></li>
+        <li class="nav-link"><a href="{% url 'blog:category' 'lifestyle' %}">Lifestyle</a></li>
+        <li class="nav-link"><a href="{% url 'blog:category' 'environment' %}">Environment</a></li>
+        <li class="nav-link"><a href="{% url 'blog:category' 'culture' %}">Culture</a></li>
+      </ul>
+
+      <div id="nav-right-items">
+        <button id="search-btn">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+
+      <div id="search-dropdown">
+        <div class="search-content-wrapper">
+          <!-- search form -->
+          <form action="{% url 'blog:search' %}" class="search-form">
+            <input type="text" name="q" id="search" placeholder="Search on Tribune States...">
+            <button type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+          <!-- end of search form -->
+          <h3 class="search-suggestion-title">
+            Trending Topics on Tribute States:
+          </h3>
+          {% show_trending_list 5 %}
+        </div>
+      </div>
+    </nav>
+    <!-- end of navbar -->
+
+    <div id="scroll-progress-bar"></div>
+
+  </header>

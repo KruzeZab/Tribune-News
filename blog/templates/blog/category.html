@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load trendings %}
+
+{% block content %}
+    
+  <main id="tribune-content" class="wrapper container-fluid">
+    <div class="category-heading">
+      <h1>TRIBUNE STATES</h1>
+    </div>
+
+    <!-- title -->
+    <h2 class="category-title">
+      {{ blogs.0.category|upper }}
+    </h2>
+    <!-- end of title -->
+    <div class="featured-section bg-white">
+      <div class="latest-news featured-item">
+        <h3>Latest News</h3>
+        <ul class="latest-news-items">
+          {% for blog in blogs|slice:'2:6' %}
+          <li>
+            <a href="{% url 'blog:article' blog.category blog.slug %}">
+            {{ blog.title|title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- main card -->
+      <article class="trending pb-2 featured-item card">
+        <div class="card-img">
+          <img data-src="{{ blogs.0.photo_main.url }}" alt="">
+        </div>
+        <div class="card-body">
+          <a href="{% url 'blog:article' blogs.0.category blogs.0.slug %}" class="card-title">
+            <h2>{{ blogs.0.title }}</h2>
+          </a>
+        </div>
+
+      </article>
+      <!-- end of main card -->
+
+      <!-- main card -->
+      <article class="trending pb-2 featured-item card">
+        <div class="card-img">
+          <img data-src="{{ blogs.1.photo_main.url }}" alt="">
+        </div>
+        <div class="card-body">
+          <a href="{% url 'blog:article' blogs.1.category blogs.1.slug %}" class="card-title">
+            <h2>{{ blogs.1.title }}</h2>
+          </a>
+        </div>
+
+      </article>
+      <!-- end of main card -->
+    </div>
+
+    <div class="content-wrapper bg-white mb-2">
+      <div class="main-content">
+         <!-- article listings -->
+         <div class="list-article" id="main-list">
+          {% for blog in blogs|slice:'6:16' %}
+            <!-- single list article  -->
+            <article class="card mb-2 bg-white list-card">
+              <div class="list-card-wrapper">
+                <div class="card-img">
+                  <img data-src="{{ blog.photo_main.url }}" alt="">
+                </div>
+                <div class="card-body">
+                  <p class="category">
+                    <i class="fas fa-fire-alt"></i>
+                    {{ blog.category }}
+                  </p>
+                  <a href="{% url 'blog:article' blog.category blog.slug %}" class="card-title">
+                    <h2>{{ blog.title|title }}
+                    </h2>
+                  </a>
+                  <p class="card-text">
+                    {{ blog.description }}
+                  </p>
+                  <small class="time mb-2"> <i class="far fa-clock"></i>{{ blog.list_date|naturaltime }}</small>
+                </div>
+              </div>
+            </article>
+            <!-- end of single list article -->
+          {% endfor %}
+
+         </div>
+      </div>
+
+      <div class="aside-content">
+        
+        <div class="list-article">
+          <!-- Trending -->
+          <div id="trending-list" class="bg-white mb-2 sider">
+            <h2 class="trending-title">
+              <i class="fas fa-chart-line"></i> Trending
+            </h2>
+            <div class="card news">
+              {% show_trendings %}
+
+            </div>
+          </div>
+          <!-- End of trending -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+{% endblock %}
+
+{% block ajax %} <script src="{% static 'js/cat_load.js' %}"></script> {% endblock %}

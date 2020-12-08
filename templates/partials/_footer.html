@@ -1,0 +1,51 @@
+
+    <footer id="footer">
+        <div class="footer-wrapper">
+          <div class="footer-contact-info">
+            <h2>TRIBUNE STATES</h2>
+            <div class="footer-phone">
+              <i class="fas fa-phone"></i>
+              +123 456 789
+            </div>
+            <div class="footer-email">
+              <i class="fas fa-envelope-open"></i>
+              tribunestates@email.com
+            </div>
+            <div class="footer-web">
+              <i class="fas fa-globe"></i>
+              tribunestates.com
+            </div>
+          </div>
+  
+          <!--lists -->
+          <div class="footer-lists">
+            <div class="first-section">
+              <ul>
+                <li><a href="{% url 'blog:index' %}">Home</a></li>
+                <li><a href="{% url 'blog:category' 'politics' %}">Politics</a></li>
+                <li><a href="{% url 'blog:category' 'agriculture' %}">Agriculture</a></li>
+              </ul>
+            </div>
+            <div class="second-section">
+              <ul>
+                <li><a href="{% url 'blog:category' 'science' %}">Science</a></li>
+                <li><a href="{% url 'blog:category' 'food' %}">Food</a></li>
+                <li><a href="{% url 'blog:category' 'sports' %}">Sports</a></li>
+              </ul>
+            </div>
+            <div class="third-section">
+              <ul>
+                <li><a href="{% url 'blog:category' 'lifestyle' %}">Lifestyle</a></li>
+                <li><a href="{% url 'blog:category' 'environment' %}">Environment</a></li>
+                <li><a href="{% url 'blog:category' 'culture' %}">Culture</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+  
+        <h3 class="copyright-marker">
+          Tribune States. Copyright &copy; 2020.
+        </h3>
+        
+      </footer>
+  

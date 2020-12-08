@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load trendings %}
+
+{% block content %}
+    
+  <main id="tribune-content" class="wrapper container-fluid">
+    
+    <div class="content-wrapper bg-white">
+      <!-- main content -->
+      <div class="main-content">
+        <div class="article-heading">
+          <a href="{% url 'blog:category' blog.category %}">{{ blog.category|title }}</a>
+          <small class="post-time">
+            · Posted {{ blog.list_date|naturaltime }}
+          </small> 
+          <div class="social-share-icons">
+            <i class="fab fa-facebook" onclick="shareFacebook();"></i>
+            <i class="fab fa-twitter" onclick="shareTwitter();"></i>
+            <i class="fab fa-pinterest" onclick="sharePinterest();"></i>
+            <i class="fab fa-google-plus" onclick="shareGoogle();"></i>
+          </div>
+          <div class="article-title">
+            <h2>{{ blog.title|title }}</h2>
+          </div>
+        </div>
+
+        <div class="article-content">
+          <div class="card-img">
+            <img data-src="{{ blog.photo_main.url }}" alt="">
+          </div>
+          <div class="article-body">
+            {{ blog.content|safe }}
+              
+            </div>
+          </div>
+        </div>
+        <div class="aside-content">
+          <!-- Trending -->
+          <div id="trending-list" class="bg-white mb-2 sider">
+            <h2 class="trending-title">
+              <i class="fas fa-chart-line"></i> Trending
+            </h2>
+            <div class="card news">
+              {% show_trendings %}
+            </div>
+          </div>
+          <!-- End of trending -->
+        </div>
+    </div>
+    <!-- end of main content -->
+
+    <!-- Recommendations -->
+    <div class="divider"></div>
+
+    <div class="recommendation bg-white mb-2">
+      <h2 class="recom-heading">More From Tribune States</h2>
+      
+      <div class="recommendation-wrapper">
+        {% for article in articles %}
+          <!-- single recommendation -->
+          <article class="recom-article card">
+            <div class="card-img">
+              <img data-src="{{ article.photo_main.url }}" alt="">
+            </div>
+              <a href="{% url 'blog:article' article.category article.slug %}" class="recom-title">
+                <h2>{{ article.title|title }}</h2>
+              </a>
+          </article>
+          <!-- end of single recommendation -->
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+{% endblock %}
