@@ -6,7 +6,6 @@ from django.utils.text import slugify
 
 from .utils import generate_unique_slug
 
-import cloudinary
 from cloudinary.models import CloudinaryField
 
 
