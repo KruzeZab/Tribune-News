@@ -123,14 +123,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT= BASE_DIR / 'static'
+STATIC_ROOT= BASE_DIR + '/static'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'tribune/static'
+    BASE_DIR + '/tribune/static'
 ]
 
 # Media Folder Settings
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR + '/media'
 MEDIA_URL = '/media/'
 
 # Messages
