@@ -14,7 +14,7 @@ import cloudinary.api
 SECRET_KEY = os.environ.get('TRIBUNE_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['tribunenewsapp.herokuapp.com', ]
 
