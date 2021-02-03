@@ -71,7 +71,7 @@ def showContent(request):
             context['last'] = True
         context['posts'] = posts
         return render(request, 'blog/data.html', context)
-    return render(request, '404.html', status_code=404)
+    return render(request, '404.html', status=404)
 
 def catShowContent(request):
     if request.is_ajax():
