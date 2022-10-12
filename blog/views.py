@@ -5,7 +5,7 @@ from django.db.models import F
 
 from .models import Blog
 
-# Create your views here.
+# You can create your views here.
 class IndexView(ListView):
     context_object_name = 'blogs'
     template_name = 'blog/index.html'
