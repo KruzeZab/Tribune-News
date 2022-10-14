@@ -9,7 +9,7 @@ from .utils import generate_unique_slug
 from cloudinary.models import CloudinaryField
 
 
-# Create your models here.
+# You can create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=55)
 
