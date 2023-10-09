@@ -1,0 +1,71 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% load humanize %} 
+{% load trendings %} 
+{% block content %}
+
+<main id="tribune-content" class="wrapper container-fluid">
+  <div class="content-wrapper bg-white">
+    <!-- main content -->
+    <div class="main-content">
+      <form id="fake-news-form" method="GET">
+        <textarea
+          class="form-control"
+          name="news"
+          id="news"
+          cols="30"
+          rows="10"
+          required
+        ></textarea>
+        <button type="submit" style="border-radius: 4px; background: rgb(225, 59, 59); border: none; color: white; padding: 10px 20px; cursor: pointer; margin-top: 20px;">Check</button>
+      </form>
+
+      <div style="margin-top: 10px; font-size: 21px">
+        <p style="color: rgb(255, 59, 59); font-weight: bold; margin-bottom: 10px;">Result: </p>
+        <hr />
+        <div id="fake-news-result" style="margin-top: 10px; display: flex; flex-direction: column; gap: 5px">
+
+          <p>Linear Regression: </p>
+          <p>Decision Tree: </p>
+          <p>Gradient Boosting: </p>
+          <p>Random Forest: </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+{% block ajax %}
+
+<script>
+  const form = document.querySelector('#fake-news-form');
+  console.log(form);
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const text = document.querySelector('#news').value;
+    console.log(text);
+
+    const response = await fetch(`http://127.0.0.1:8000/predict/?text=${text}`, {
+      method: 'GET',
+    })
+
+    const data = await response.json();
+
+    if (!data) return;
+
+    const result = document.querySelector('#fake-news-result');
+
+    result.innerHTML = `
+      <p>Linear Regression: ${data.LR}</p>
+      <p>Decision Tree: ${data.DT}</p>
+      <p>Gradient Boosting: ${data.GB}</p>
+      <p>Random Forest: ${data.RF}</p>
+    `
+    
+  })
+</script>
+
+{% endblock %}
